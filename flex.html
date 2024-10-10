@@ -1,0 +1,29 @@
+<head>
+    <style>
+/* how to flex desktop/mobile */
+        #container {
+            display: flex;
+            flex-direction: row;
+        }
+        @media (orientation: portrait) {
+            #container {
+                flex-direction: column;
+            }
+        }
+
+/* optional */
+        .item {
+            text-align: center;
+            padding: 100px;
+            border-width: 1px;
+            border-style: solid;            
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="item">thing 1</div>
+        <div class="item">thing 2</div>
+    </div>
+</body>
