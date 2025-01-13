@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story Card Gallery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { height: 100%; overflow: hidden; }
+    .container { display: flex; width: 100%; height: 100%; position: relative; }
+    .story { flex: 1; display: flex; justify-content: center; align-items: center; font-size: 2em; background: #333; color: white; }
+    .status-bar { position: absolute; top: 0; left: 0; height: 5px; background: rgba(255, 255, 255, 0.5); transition: width 0.3s; }
+    .nav { position: absolute; width: 50%; height: 100%; top: 0; cursor: pointer; }
+    .left { left: 0; }
+    .right { right: 0; }
+  </style>
+</head>
+<body>
+
+<div id="app" class="container">
+  <div class="story" style="background: #FF6B6B;">Story 1</div>
+  <div class="story" style="background: #4ECDC4; display: none;">Story 2</div>
+  <div class="story" style="background: #1A535C; display: none;">Story 3</div>
+  <div class="status-bar" id="status"></div>
+  <div class="nav left" onclick="navigate(-1)"></div>
+  <div class="nav right" onclick="navigate(1)"></div>
+</div>
+
+<script>
+  let index = 0;
+  const stories = document.querySelectorAll('.story');
+  const status = document.getElementById('status');
+  
+  function navigate(step) {
+    stories[index].style.display = 'none';
+    index = (index + step + stories.length) % stories.length;
+    stories[index].style.display = 'flex';
+    status.style.width = `${((index + 1) / stories.length) * 100}%`;
+  }
+  
+  navigate(0); // Initialize status bar
+</script>
+
+</body>
+</html>

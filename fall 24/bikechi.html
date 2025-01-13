@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicago Lakefront Trail Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; background: #87CEEB; }
+        .skyline { position: absolute; bottom: 0; width: 100%; height: 100px; background: url('skyline.png') repeat-x; }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div class="skyline"></div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const bike = { x: 50, y: canvas.height / 2, width: 50, height: 30, speed: 15, boost: 5 };
+        const obstacles = [];
+        const speeds = { bike: 15, ebike: 20, pedestrian: 5, rollerblader: 10 };
+        const keys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false };
+
+        document.addEventListener('keydown', (e) => keys[e.key] = true);
+        document.addEventListener('keyup', (e) => keys[e.key] = false);
+
+        function createObstacle(type) {
+            const y = Math.random() * canvas.height;
+            const speed = speeds[type];
+            const width = type === 'rollerblader' ? 60 : 30;
+            obstacles.push({ x: canvas.width, y, width, height: 30, speed, type });
+        }
+
+        function update() {
+            if (keys.ArrowUp) bike.y -= bike.speed;
+            if (keys.ArrowDown) bike.y += bike.speed;
+            if (keys.ArrowRight) bike.x += bike.boost;
+            if (keys.ArrowLeft) bike.x -= bike.speed;
+
+            bike.y = Math.max(0, Math.min(canvas.height - bike.height, bike.y));
+            bike.x = Math.max(0, Math.min(canvas.width - bike.width, bike.x));
+
+            obstacles.forEach(obstacle => {
+                obstacle.x -= obstacle.speed;
+                if (obstacle.x + obstacle.width < 0) obstacles.splice(obstacles.indexOf(obstacle), 1);
+            });
+
+            if (Math.random() < 0.02) {
+                const types = ['bike', 'ebike', 'pedestrian', 'rollerblader'];
+                createObstacle(types[Math.floor(Math.random() * types.length)]);
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'green';
+            ctx.fillRect(bike.x, bike.y, bike.width, bike.height);
+
+            obstacles.forEach(obstacle => {
+                ctx.fillStyle = obstacle.type === 'rollerblader' ? 'purple' : 'red';
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>

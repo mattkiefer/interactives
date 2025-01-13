@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .tile { display: inline-block; width: 40px; height: 40px; margin: 5px; border: 1px solid #ccc; line-height: 40px; }
+        .correct { background-color: green; color: white; }
+        .present { background-color: yellow; color: black; }
+        .absent { background-color: gray; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Wordle Clone</h1>
+    <div id="board"></div>
+    <input type="text" id="guess" maxlength="5">
+    <button onclick="checkGuess()">Guess</button>
+    <script>
+        const words = ["apple", "grape", "peach", "berry", "melon"];
+        const word = words[Math.floor(Math.random() * words.length)];
+        const board = document.getElementById('board');
+        const guessInput = document.getElementById('guess');
+        let attempts = 6;
+
+        function checkGuess() {
+            if (attempts === 0) return alert(`Game over! The word was ${word}.`);
+            const guess = guessInput.value.toLowerCase();
+            if (guess.length !== 5) return alert('Please enter a 5-letter word.');
+            let row = '';
+            for (let i = 0; i < 5; i++) {
+                const tileClass = guess[i] === word[i] ? 'correct' : word.includes(guess[i]) ? 'present' : 'absent';
+                row += `<div class="tile ${tileClass}">${guess[i]}</div>`;
+            }
+            board.innerHTML += `<div>${row}</div>`;
+            guessInput.value = '';
+            if (guess === word) return alert('Congratulations! You guessed the word.');
+            attempts--;
+        }
+    </script>
+</body>
+</html>

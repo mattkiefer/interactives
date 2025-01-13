@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #000;
+            color: #00FF00;
+            font-family: 'Press Start 2P', cursive;
+        }
+        canvas {
+            border: 2px solid #00FF00;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .slider {
+            width: 300px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="controls">
+        <label for="difficulty">Difficulty: </label>
+        <input type="range" id="difficulty" class="slider" min="0" max="10" value="5">
+    </div>
+    <canvas id="pongCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('pongCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 400;
+
+        const paddleWidth = 10, paddleHeight = 100, ballSize = 10;
+        let playerY = (canvas.height - paddleHeight) / 2;
+        let opponentY = (canvas.height - paddleHeight) / 2;
+        let ballX = canvas.width / 2, ballY = canvas.height / 2;
+        let ballSpeedX = 4, ballSpeedY = 4;
+        let playerScore = 0, opponentScore = 0;
+        const winningScore = 3;
+        let difficulty = 5; // 0 (easy) to 10 (hard)
+        let upPressed = false, downPressed = false;
+        let confetti = [];
+
+        document.getElementById('difficulty').addEventListener('input', function() {
+            difficulty = parseInt(this.value);
+        });
+
+        function drawRect(x, y, width, height, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height);
+        }
+
+        function drawCircle(x, y, radius, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+            ctx.fill();
+        }
+
+        function moveBall() {
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            if (ballY <= 0 || ballY >= canvas.height) ballSpeedY = -ballSpeedY;
+
+            if (ballX <= paddleWidth) {
+                if (ballY > playerY && ballY < playerY + paddleHeight) {
+                    ballSpeedX = -ballSpeedX;
+                } else {
+                    opponentScore++;
+                    resetBall();
+                }
+            }
+
+            if (ballX >= canvas.width - paddleWidth) {
+                if (ballY > opponentY && ballY < opponentY + paddleHeight) {
+                    ballSpeedX = -ballSpeedX;
+                } else {
+                    playerScore++;
+                    resetBall();
+                }
+            }
+        }
+
+        function movePaddle(event) {
+            const rect = canvas.getBoundingClientRect();
+            playerY = event.clientY - rect.top - paddleHeight / 2;
+        }
+
+        function moveOpponent() {
+            const centerY = opponentY + paddleHeight / 2;
+            if (centerY < ballY - 35) {
+                opponentY += difficulty;
+            } else if (centerY > ballY + 35) {
+                opponentY -= difficulty;
+            }
+        }
+
+        function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
+            ballSpeedX = -ballSpeedX;
+        }
+
+        function draw() {
+            drawRect(0, 0, canvas.width, canvas.height, '#000');
+            drawRect(0, playerY, paddleWidth, paddleHeight, '#00FF00');
+            drawRect(canvas.width - paddleWidth, opponentY, paddleWidth, paddleHeight, '#00FF00');
+            drawCircle(ballX, ballY, ballSize, '#00FF00');
+            ctx.fillStyle = '#00FF00';
+            ctx.font = '20px "Press Start 2P"';
+            ctx.fillText(`Player: ${playerScore}`, 100, 50);
+            ctx.fillText(`Opponent: ${opponentScore}`, canvas.width - 200, 50);
+        }
+
+        function gameLoop() {
+            if (playerScore >= winningScore || opponentScore >= winningScore) {
+                ctx.fillStyle = '#00FF00';
+                ctx.font = '30px "Press Start 2P"';
+                ctx.fillText(playerScore >= winningScore ? 'You Win!' : 'You Lose!', canvas.width / 2 - 50, canvas.height / 2);
+                if (playerScore >= winningScore) {
+                    startConfetti();
+                }
+                return;
+            }
+            moveBall();
+            moveOpponent();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'ArrowUp') upPressed = true;
+            if (event.key === 'ArrowDown') downPressed = true;
+        }
+
+        function handleKeyUp(event) {
+            if (event.key === 'ArrowUp') upPressed = false;
+            if (event.key === 'ArrowDown') downPressed = false;
+        }
+
+        function updatePlayerPosition() {
+            if (upPressed && playerY > 0) playerY -= 5;
+            if (downPressed && playerY < canvas.height - paddleHeight) playerY += 5;
+        }
+
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        canvas.addEventListener('mousemove', movePaddle);
+
+        function gameLoopWithKeys() {
+            if (playerScore >= winningScore || opponentScore >= winningScore) {
+                ctx.fillStyle = '#00FF00';
+                ctx.font = '30px "Press Start 2P"';
+                ctx.fillText(playerScore >= winningScore ? 'You Win!' : 'You Lose!', canvas.width / 2 - 50, canvas.height / 2);
+                if (playerScore >= winningScore) {
+                    startConfetti();
+                }
+                return;
+            }
+            moveBall();
+            moveOpponent();
+            updatePlayerPosition();
+            draw();
+            requestAnimationFrame(gameLoopWithKeys);
+        }
+
+        function startConfetti() {
+            for (let i = 0; i < 100; i++) {
+                confetti.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 4 + 1,
+                    d: Math.random() * 5 + 1,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    tilt: Math.random() * 10 - 10
+                });
+            }
+            requestAnimationFrame(drawConfetti);
+        }
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            draw();
+            for (let i = 0; i < confetti.length; i++) {
+                let c = confetti[i];
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, true);
+                ctx.fillStyle = c.color;
+                ctx.fill();
+                c.y += c.d;
+                c.tilt += 0.1;
+                if (c.y > canvas.height) {
+                    c.y = 0;
+                    c.x = Math.random() * canvas.width;
+                }
+            }
+            requestAnimationFrame(drawConfetti);
+        }
+
+        gameLoopWithKeys();
+    </script>
+</body>
+</html>
