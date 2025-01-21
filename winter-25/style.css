@@ -1,0 +1,63 @@
+body {
+    padding-left: 10%;
+    padding-right:10%;
+    background-color: whitesmoke;
+  }
+  
+  h1 {
+    font-size: 3em;
+    color: white;
+    font-family: Helvetica;
+  }
+  
+  div {
+    border: 1px solid red;
+  }
+  
+  #byline {
+    font-size: 1.1em;
+  }
+  
+  p {
+    font-size: 1.3em;
+    line-height: 1.3em;
+    padding-bottom: 20px;
+  }
+  
+  .img-container {
+    width: 100%;
+  }
+  
+  img {
+    margin: auto;
+    display: block;
+  }
+  
+  .cutline {
+    font-size: 10px;
+  }
+  
+  #contact {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    font-style: italic;
+    text-align: center;
+  }
+  
+  /* responsive design */
+  #content {
+    width: 50%;
+    margin: auto;
+  }
+  
+.hed {
+    background-color: #333333;
+    color: white;
+}
+
+  @media (orientation: portrait) {
+    #content {
+      width: 100%;
+    }
+  }
