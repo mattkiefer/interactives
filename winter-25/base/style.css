@@ -35,6 +35,10 @@ body {
     font-size: 10px;
   }
   
+  .emoji-list {
+    list-style-type: none;
+  }
+
   /* responsive design */
   #content {
     width: 75%;
