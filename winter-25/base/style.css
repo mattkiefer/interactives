@@ -29,6 +29,7 @@ body {
   img {
     margin: auto;
     display: block;
+    width: 90%;
   }
   
   .cutline {
