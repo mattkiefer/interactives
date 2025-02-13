@@ -1,0 +1,17 @@
+.content {
+    width: 50%;
+    margin: auto;
+}
+
+.lede-container {
+    position: relative;
+}
+
+.lede-image {
+    display: block;
+    width: 100%;
+}
+
+.lede-text {
+    position: absolute;
+}
