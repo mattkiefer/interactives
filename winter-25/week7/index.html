@@ -1,0 +1,30 @@
+<head>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="content">
+
+<div id="nav-bar">
+    <div class="nav-button"><a href="#usa">U.S.A.</a></div>
+    <div class="nav-button"><a href="teams/">Canada</a></div>
+    <div class="nav-button"><a href="https://nhl.com">Sweden</a></div>
+    <div class="nav-button">Finland</div>
+</div>
+
+<h1>U.S. beats Canada in 4 Nations Face-Off</h1>
+<h2>Rematch set for Thursday</h2>
+
+
+<p>For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.</p>
+<h3 id="usa">Team U.S.A. first gold in awhile</h3>
+<p>There were three fights in the first nine seconds. Penalties all around ...</p>
+<p>For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.</p>
+<p>There were three fights in the first nine seconds. Penalties all around ...</p>
+<p>For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.</p>
+<p>There were three fights in the first nine seconds. Penalties all around ...</p>
+<p>For the first time in 14 years, the U.S. men's national hockey team beat their rivals to the north.</p>
+<p>There were three fights in the first nine seconds. Penalties all around ...</p>
+</div>
+</body>

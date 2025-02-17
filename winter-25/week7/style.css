@@ -1,0 +1,34 @@
+/*desktop*/
+#content {
+    width: 50%;
+    margin: auto;
+    line-height: 1.5em;
+    font-size: 1.5em;
+}
+
+/*phone*/
+@media (orientation: portrait) {
+    #content {
+        width: 100%;
+        line-height: 1.5em;
+        font-size: 1.5em;}
+}
+
+#nav-bar {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+}
+
+.nav-button {
+    margin: auto;
+}
+
+.nav-button a {
+    color: white;
+    text-decoration: none;
+    background-color: black;
+    font-weight: bold;
+}
+
+div {border: 1px red solid;}
