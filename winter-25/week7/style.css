@@ -1,4 +1,10 @@
 /*desktop*/
+p {
+    line-height: 2em;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+}
+
 #content {
     width: 50%;
     margin: auto;
@@ -12,6 +18,9 @@
         width: 100%;
         line-height: 1.5em;
         font-size: 1.5em;}
+    #nav-bar {
+        flex-direction: column;
+    }
 }
 
 #nav-bar {
@@ -27,7 +36,6 @@
 .nav-button a {
     color: white;
     text-decoration: none;
-    background-color: black;
     font-weight: bold;
 }
 
