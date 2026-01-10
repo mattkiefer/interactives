@@ -1,0 +1,24 @@
+h1 {
+    font-size: 2em;
+}
+
+#content {
+    width:50%;
+    margin:auto;
+    border: 1px solid gray;
+}
+
+.story {
+    /* this is where paragraphs are styled */
+    /* color: pink; */
+}
+
+/* mobile rules */
+@media (orientation:portrait) {
+    #content {
+        width: 100%;
+    }
+    body {
+        font-size: 2em;
+    }
+}

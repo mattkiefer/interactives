@@ -1,0 +1,80 @@
+body {
+    padding-left: 10%;
+    padding-right:10%;
+    background-color: whitesmoke;
+
+    font-size: 1.3em;
+    line-height: 1.3em;
+    padding-bottom: 20px;
+  }
+#hero-header {
+  background-image: url('flood.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px; /* Required to give the background space */
+  display: flex; /* Easiest way to center content in 2026 */
+  align-items: center;
+  justify-content: center;
+}
+
+#hero-header h1 {
+  font-family: Impact;
+  font-size: 4em;
+  line-height: 1em;
+  color: white;
+  white-space: pre-line;
+  text-shadow: 5px 5px 10px rgba(0,0,0,0.5); /* Enhances readability */
+  text-align: left;
+  margin: 0; /* Removes default browser spacing */
+  width: 100%;
+  max-width: 1200px; /* Prevents text from becoming too long on ultra-wide screens */
+  margin-bottom: 25px;
+
+}
+  
+  div {
+    /* border: 1px solid red; */
+  }
+  
+  #byline {
+    font-size: 1.1em;
+  }
+  
+  
+  .img-container {
+    width: 100%;
+  }
+  
+  img {
+    margin: auto;
+    display: block;
+  }
+  
+  .cutline {
+    font-size: 10px;
+  }
+  
+  #contact {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* responsive design */
+  #content {
+    width: 50%;
+    margin: auto;
+  }
+  
+.hed {
+    background-color: #333333;
+    color: white;
+}
+
+  @media (orientation: portrait) {
+    #content {
+      width: 100%;
+    }
+  }
