@@ -27,6 +27,8 @@ p {
     display: flex;
     flex-direction: row;
     background-color: black;
+    position: sticky;
+    top: 0;
 }
 
 .nav-button {
@@ -40,3 +42,7 @@ p {
 }
 
 div {border: 1px red solid;}
+
+html {
+    scroll-behavior: smooth;
+}

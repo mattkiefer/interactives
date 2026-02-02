@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Block Layout Example</title>
+    <style>
+      .block-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Horizontal and vertical gap between items */
+      }
+      .block-item {
+        background-color: #f0f0f0;
+        padding: 20px;
+        box-sizing: border-box;
+        width: calc(
+          33.333% - 20px
+        ); /* Adjust width based on the number of columns */
+      }
+      .block-item:nth-child(odd) {
+        height: 150px; /* Example varying height */
+      }
+      .block-item:nth-child(even) {
+        height: 100px; /* Example varying height */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="block-container">
+      <div class="block-item">Item 1</div>
+      <div class="block-item">Item 2</div>
+      <div class="block-item">Item 3</div>
+      <div class="block-item">Item 4</div>
+      <div class="block-item">Item 5</div>
+      <div class="block-item">Item 6</div>
+    </div>
+  </body>
+</html>
